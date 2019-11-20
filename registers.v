@@ -1,4 +1,3 @@
-
 module registers(
     input[1:0]addr,
     input rd,wr,
