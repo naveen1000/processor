@@ -1,17 +1,31 @@
 module registers_tb;
-    reg [1:0]sel;
-    wire [7:0]data;
+    reg [1:0]addr;
+    reg rd;
+    reg wr;
+    reg [7:0]data_in;
+    wire [7:0]data_out;
     integer i;
 
-registers RegUT(sel,data);
+registers RegUT(addr,rd,wr,data_in,data_out);
 
 initial
 begin
-$monitor ($time," sel=%d, data=%d",sel,data);
-    for (i=0; i<4; i=i+1)
-    begin
-    #5 sel=i; 
-    end
+$monitor ($time," addr=%d, data=%d   %d",addr,data_in,data_out);
+    
+    #5 addr=2'b00; wr=1; data_in=8'h00;
+    #5 wr=0; 
+    #5 addr=2'b01; wr=1; data_in=8'h02;
+    #5 wr=0; 
+    #5 addr=2'b10; wr=1; data_in=8'h01;
+    #5 wr=0; 
+    #5 addr=2'b11; wr=1; data_in=8'h11;
+    #5 wr=0; 
+    
+    #5 addr=2'b00; rd=1; 
+    #5 addr=2'b01; rd=1;   
+    #5 addr=2'b10; rd=1; 
+    #5 addr=2'b11; rd=1; 
+
 #5 $finish;
 end
 endmodule
