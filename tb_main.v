@@ -1,10 +1,11 @@
 module tb_main;
 integer i;
+//alu_tb
 reg [2:0]opcode;
 reg [7:0]A,B;
 wire [7:0]alu_out;
 alu DUT(opcode,A,B,alu_out);
-
+//reg_tb
 reg [1:0]addr;
 reg rd;
 reg wr;

@@ -1,19 +1,19 @@
 module memory_tb;
-    reg [1:0]addr;
-    reg rd;
+    reg [1:0]maddr;
+    reg mrd;
     wire [16:0]data;
     integer i;
 
-memory RegUT(addr,rd,data);
+memory RegUT(maddr,mrd,data);
 
 initial
 begin
-$monitor ($time," addr=%d, data=%b ",addr,data);
+$monitor ($time," addr=%d, data=%b ",maddr,data);
     
-    #5 addr=2'b00; rd=1; 
-    #5 addr=2'b01; rd=1;   
-    #5 addr=2'b10; rd=1; 
-    #5 addr=2'b11; rd=1; 
+    #5 maddr=2'b00; mrd=1; 
+    #5 maddr=2'b01; mrd=1;   
+    #5 maddr=2'b10; mrd=1; 
+    #5 maddr=2'b11; mrd=1; 
 
 #5 $finish;
 end
