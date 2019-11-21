@@ -22,7 +22,7 @@ inst_reg IUT(pc,en,ir_data);
 initial
 begin
 $monitor ($time," A=%d, B=%d,alu_out=%d,sel=%d,ir_data=%b",A,B,alu_out,addr,ir_data);
-    for (i=0; i<5; i=i+1)
+    for (i=0; i<11; i=i+1)
     begin
         #5 pc=i;en=1;
         #5 $display("%b",ir_data[15:12]);
