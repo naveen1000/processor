@@ -1,7 +1,7 @@
 module memory_tb;
     reg [1:0]maddr;
     reg mrd;
-    wire [16:0]data;
+    wire [15:0]data;
     integer i;
 
 memory RegUT(maddr,mrd,data);
