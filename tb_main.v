@@ -37,7 +37,6 @@ $monitor ($time," A=%d, B=%d,alu_out=%d,sel=%d,ir_data=%b",A,B,alu_out,addr,ir_d
         #5 A=data_out;
         addr=ir_data[1:0]; rd=1;
         #5 B=data_out;
-        #5 $display("opcode=%b",ir_data[15:13]);
         #5 opcode = ir_data[15:13];
         $display("add executed");
         #5 addr=ir_data[9:8]; wr=1; data_in=alu_out;
@@ -105,8 +104,51 @@ $monitor ($time," A=%d, B=%d,alu_out=%d,sel=%d,ir_data=%b",A,B,alu_out,addr,ir_d
         else
         #5 i=ir_data[7:0]-1;
         end
-    end
+        if(ir_data[15:12]==4'b0010) //and
+        begin
+        addr=ir_data[5:4]; rd=1;
+        #5 A=data_out;
+        addr=ir_data[1:0]; rd=1;
+        #5 B=data_out;
+        #5 opcode = 3'b010;
+        #5 $display("and executed");
+        #5 addr=ir_data[9:8]; wr=1; data_in=alu_out;
+        #5 wr=0; 
+        end
+        if(ir_data[15:12]==4'b0011) //or
+        begin
+        addr=ir_data[5:4]; rd=1;
+        #5 A=data_out;
+        addr=ir_data[1:0]; rd=1;
+        #5 B=data_out;
+        #5 opcode = 3'b011;
+        #5 $display("or executed");
+        #5 addr=ir_data[9:8]; wr=1; data_in=alu_out;
+        #5 wr=0; 
+        end
+        if(ir_data[15:12]==4'b0100) //xor
+        begin
+        addr=ir_data[5:4]; rd=1;
+        #5 A=data_out;
+        addr=ir_data[1:0]; rd=1;
+        #5 B=data_out;
+        #5 opcode = 3'b100;
+        #5 $display("exor executed");
+        #5 addr=ir_data[9:8]; wr=1; data_in=alu_out;
+        #5 wr=0; 
+        end
+        if(ir_data[15:12]==4'b0101) //INV
+        begin
+        addr=ir_data[5:4]; rd=1;
+        #5 A=data_out;
+        #5 opcode = 3'b101;
+        #5 $display("INV executed");
+        #5 addr=ir_data[9:8]; wr=1; data_in=alu_out;
+        #5 wr=0; 
+        end
 
+    end
+        
 #5 $finish;
 end
 endmodule
