@@ -85,6 +85,10 @@ $monitor ($time," A=%d, B=%d,alu_out=%d,sel=%d,ir_data=%b",A,B,alu_out,addr,ir_d
         if(ir_data[15:12]==4'b1100) //HLT
         begin
         $display("HLT executed");
+            #5 addr=2'b00; rd=1; 
+            #5 addr=2'b01; rd=1;   
+            #5 addr=2'b10; rd=1; 
+            #5 addr=2'b11; rd=1; 
         #5 $finish;
         end
         if(ir_data[15:12]==4'b1110) //DJNZ R0 LABEL

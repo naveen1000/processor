@@ -9,12 +9,13 @@ always @(*)
 begin
     if(wr)
         r[addr]=data_in;
-        $display("r[%d]=%d",addr,data_in);
+        //$display("wr=r[%d]=%d",addr,data_in);
 end
 always @(*)
 begin
     if(rd)
         data_out=r[addr];
+        $display("rd=r[%d]=%d",addr,data_out);
 end
 
 
