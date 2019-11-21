@@ -24,7 +24,7 @@ begin
 $monitor ($time," A=%d, B=%d,alu_out=%d,sel=%d,ir_data=%b",A,B,alu_out,addr,ir_data);
     for (i=0; i<11; i=i+1)
     begin
-        #5 pc=i;en=1;
+        #5 pc=i;en=1;$display("%d",i);
         #5 $display("%b",ir_data[15:12]);
         if(ir_data[15:12]==4'b1000) //load 
         begin
@@ -55,8 +55,12 @@ $monitor ($time," A=%d, B=%d,alu_out=%d,sel=%d,ir_data=%b",A,B,alu_out,addr,ir_d
         #5 addr=ir_data[9:8]; wr=1; data_in=alu_out;
         #5 wr=0; 
         end
-
-
+        if(ir_data[15:12]==4'b1111) //JMP
+        begin
+        $display("jmp executed");
+        i=ir_data[7:0]-1;
+        end
+    $display("end--%d",i);
     end
 
 #5 $finish;
