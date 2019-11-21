@@ -1,5 +1,5 @@
 module inst_reg(
-    input [1:0]pc,
+    input [7:0]pc,
     input en,
     output [15:0]ir_data);
 

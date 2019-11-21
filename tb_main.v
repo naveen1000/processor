@@ -13,7 +13,7 @@ reg [7:0]data_in;
 wire [7:0]data_out;
 registers RegUT(addr,rd,wr,data_in,data_out);
 //IR_tb
-reg [1:0]pc;
+reg [7:0]pc;
 reg en;
 wire [15:0]ir_data;
 inst_reg IUT(pc,en,ir_data);
@@ -22,7 +22,7 @@ inst_reg IUT(pc,en,ir_data);
 initial
 begin
 $monitor ($time," A=%d, B=%d,alu_out=%d,sel=%d,ir_data=%b",A,B,alu_out,addr,ir_data);
-    for (i=0; i<4; i=i+1)
+    for (i=0; i<5; i=i+1)
     begin
         #5 pc=i;en=1;
         #5 $display("%b",ir_data[15:12]);
