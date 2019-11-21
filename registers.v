@@ -9,6 +9,7 @@ always @(*)
 begin
     if(wr)
         r[addr]=data_in;
+        $display("r[%d]=%d",addr,data_in);
 end
 always @(*)
 begin
@@ -16,6 +17,6 @@ begin
         data_out=r[addr];
 end
 
-//assign data_out=r[addr];
+
 
 endmodule // register ram module
