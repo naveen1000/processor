@@ -1,9 +1,9 @@
 module memory(
     input[1:0]addr,
     input rd,
-    output reg [16:0]data);
+    output reg [15:0]data);
     
-reg [16:0] mem[0:3];
+reg [15:0] mem[0:3];
 
 initial 
 begin
