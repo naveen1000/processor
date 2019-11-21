@@ -22,7 +22,7 @@ inst_reg IUT(pc,en,ir_data);
 initial
 begin
 $monitor ($time," A=%d, B=%d,alu_out=%d,sel=%d,ir_data=%b",A,B,alu_out,addr,ir_data);
-    for (i=0; i<6; i=i+1)
+    for (i=0; i<255; i=i+1)
     begin
         #5 pc=i;en=1;$display("%d",i);
         #5 $display("%b",ir_data[15:12]);
@@ -81,6 +81,11 @@ $monitor ($time," A=%d, B=%d,alu_out=%d,sel=%d,ir_data=%b",A,B,alu_out,addr,ir_d
         $display("DEC executed");
         #5 addr=ir_data[9:8]; wr=1; data_in=alu_out;
         #5 wr=0; 
+        end
+        if(ir_data[15:12]==4'b1100) //HLT
+        begin
+        $display("HLT executed");
+        #5 $finish;
         end
     
     end
