@@ -22,7 +22,7 @@ inst_reg IUT(pc,en,ir_data);
 initial
 begin
 $monitor ($time," A=%d, B=%d,alu_out=%d,sel=%d,ir_data=%b",A,B,alu_out,addr,ir_data);
-    for (i=0; i<255; i=i+1)
+    for (i=0; i<256; i=i+1)
     begin
         #5 pc=i;en=1;$display("%d",i);
         #5 $display("%b",ir_data[15:12]);
@@ -85,13 +85,14 @@ $monitor ($time," A=%d, B=%d,alu_out=%d,sel=%d,ir_data=%b",A,B,alu_out,addr,ir_d
         if(ir_data[15:12]==4'b1100) //HLT
         begin
         $display("HLT executed");
+        //To display reg contents by reading
             #5 addr=2'b00; rd=1; 
             #5 addr=2'b01; rd=1;   
             #5 addr=2'b10; rd=1; 
             #5 addr=2'b11; rd=1; 
         #5 $finish;
         end
-        if(ir_data[15:12]==4'b1110) //DJNZ R0 LABEL
+        if(ir_data[15:12]==4'b1110) //JNZ Reg LABEL
         begin
         $display("djmp executed");
         
