@@ -7,7 +7,7 @@ initial
 begin
 $monitor ($time," addr=%d, ir_data=%b ",pc,ir_data);
     
-    #5 pc=2'b01; en=1; 
+    #5 pc=2'b11; en=1; 
 
 #5 $finish;
 end
