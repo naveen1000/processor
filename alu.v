@@ -14,7 +14,7 @@ case(opcode)
 4: alu_out <= A ^ B;
 5: alu_out <= ~A;
 6: alu_out <= A>>B;
-7: alu_out <= 0;
+7: alu_out <= A<<B;
 default: alu_out <= 0; 
 endcase
 //$display($time," ALU: %b",ALUOut);

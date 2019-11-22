@@ -25,7 +25,7 @@ $monitor ($time," A=%d, B=%d,alu_out=%d,sel=%d,ir_data=%b",A,B,alu_out,addr,ir_d
     for (i=0; i<256; i=i+1)
     begin
         #5 pc=i;en=1;$display("%d",i);
-        #5 $display("%b",ir_data[15:12]);
+        #5 //$display("%b",ir_data[15:12]);
         if(ir_data[15:12]==4'b1000) //load 
         begin
             addr=ir_data[9:8]; wr=1; data_in=ir_data[7:0];
@@ -48,7 +48,7 @@ $monitor ($time," A=%d, B=%d,alu_out=%d,sel=%d,ir_data=%b",A,B,alu_out,addr,ir_d
         #5 A=data_out;
         addr=ir_data[1:0]; rd=1;
         #5 B=data_out;
-        #5 $display("opcode=%b",ir_data[14:12]);
+        #5 //$display("opcode=%b",ir_data[14:12]);
         #5 opcode = ir_data[14:12];
         $display("sub executed");
         #5 addr=ir_data[9:8]; wr=1; data_in=alu_out;
@@ -97,7 +97,7 @@ $monitor ($time," A=%d, B=%d,alu_out=%d,sel=%d,ir_data=%b",A,B,alu_out,addr,ir_d
         
         #5 addr=ir_data[9:8]; rd=1;
         #5 A=data_out;
-        #5 $display("%d ",data_out);
+        #5 //$display("%d ",data_out);
         
         if(data_out==0)
           A=0;
@@ -144,7 +144,7 @@ $monitor ($time," A=%d, B=%d,alu_out=%d,sel=%d,ir_data=%b",A,B,alu_out,addr,ir_d
         #5 opcode = 3'b101;
         #5 $display("INV executed");
         #5 addr=ir_data[9:8]; wr=1; data_in=alu_out;
-        #5 wr=0; 
+        #5 wr=0;
         end
 
     end
