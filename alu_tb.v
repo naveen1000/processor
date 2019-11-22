@@ -2,7 +2,7 @@ module alu_tb;
 reg [2:0]opcode;
 reg [7:0]A,B;
 wire [7:0]alu_out;
-wire cy,zero,parity;
+wire cy,zero;
 integer i;
 alu DUT(opcode,A,B,alu_out,cy,zero);
 initial
