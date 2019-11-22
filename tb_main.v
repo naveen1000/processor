@@ -43,6 +43,8 @@ $monitor ($time," A=%d, B=%d,alu_out=%d,sel=%d,ir_data=%b",A,B,alu_out,addr,ir_d
                 $display("add executed");
                 #5 addr=ir_data[9:8]; wr=1; data_in=alu_out;
                 #5 wr=0; 
+                #5 addr=3'b111; wr=1; data_in={cy,zero,6'b000000};
+                #5 wr=0; 
                 end
             4'b0001: //sub
                 begin
@@ -54,6 +56,8 @@ $monitor ($time," A=%d, B=%d,alu_out=%d,sel=%d,ir_data=%b",A,B,alu_out,addr,ir_d
                 #5 opcode = ir_data[14:12];
                 $display("sub executed");
                 #5 addr=ir_data[9:8]; wr=1; data_in=alu_out;
+                #5 wr=0; 
+                #5 addr=3'b111; wr=1; data_in={cy,zero,6'b000000};
                 #5 wr=0; 
                 end
             4'b1111: //JMP
@@ -71,6 +75,8 @@ $monitor ($time," A=%d, B=%d,alu_out=%d,sel=%d,ir_data=%b",A,B,alu_out,addr,ir_d
                 $display("INC executed");
                 #5 addr=ir_data[9:8]; wr=1; data_in=alu_out;
                 #5 wr=0; 
+                #5 addr=3'b111; wr=1; data_in={cy,zero,6'b000000};
+                #5 wr=0; 
                 end
             4'b1011: //DEC
                 begin
@@ -82,6 +88,8 @@ $monitor ($time," A=%d, B=%d,alu_out=%d,sel=%d,ir_data=%b",A,B,alu_out,addr,ir_d
                 $display("DEC executed");
                 #5 addr=ir_data[9:8]; wr=1; data_in=alu_out;
                 #5 wr=0; 
+                #5 addr=3'b111; wr=1; data_in={cy,zero,6'b000000};
+                #5 wr=0; 
                 end
             4'b1100: //HLT
                 begin
@@ -91,6 +99,7 @@ $monitor ($time," A=%d, B=%d,alu_out=%d,sel=%d,ir_data=%b",A,B,alu_out,addr,ir_d
                     #5 addr=2'b01; rd=1;   
                     #5 addr=2'b10; rd=1; 
                     #5 addr=2'b11; rd=1; 
+                    #5 addr=3'b111; rd=1; 
                 #5 $finish;
                 end
             4'b1110: //JNZ Reg LABEL
@@ -114,6 +123,8 @@ $monitor ($time," A=%d, B=%d,alu_out=%d,sel=%d,ir_data=%b",A,B,alu_out,addr,ir_d
                 #5 $display("and executed");
                 #5 addr=ir_data[9:8]; wr=1; data_in=alu_out;
                 #5 wr=0; 
+                #5 addr=3'b111; wr=1; data_in={cy,zero,6'b000000};
+                #5 wr=0; 
                 end
             4'b0011: //or
                 begin
@@ -124,6 +135,8 @@ $monitor ($time," A=%d, B=%d,alu_out=%d,sel=%d,ir_data=%b",A,B,alu_out,addr,ir_d
                 #5 opcode = 3'b011;
                 #5 $display("or executed");
                 #5 addr=ir_data[9:8]; wr=1; data_in=alu_out;
+                #5 wr=0; 
+                #5 addr=3'b111; wr=1; data_in={cy,zero,6'b000000};
                 #5 wr=0; 
                 end
             4'b0100: //xor
@@ -136,6 +149,8 @@ $monitor ($time," A=%d, B=%d,alu_out=%d,sel=%d,ir_data=%b",A,B,alu_out,addr,ir_d
                 #5 $display("exor executed");
                 #5 addr=ir_data[9:8]; wr=1; data_in=alu_out;
                 #5 wr=0; 
+                #5 addr=3'b111; wr=1; data_in={cy,zero,6'b000000};
+                #5 wr=0; 
                 end
             4'b0101: //INV
                 begin
@@ -145,6 +160,8 @@ $monitor ($time," A=%d, B=%d,alu_out=%d,sel=%d,ir_data=%b",A,B,alu_out,addr,ir_d
                 #5 $display("INV executed");
                 #5 addr=ir_data[9:8]; wr=1; data_in=alu_out;
                 #5 wr=0;
+                #5 addr=3'b111; wr=1; data_in={cy,zero,6'b000000};
+                #5 wr=0; 
                 end
 
         endcase
