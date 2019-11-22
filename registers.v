@@ -1,10 +1,10 @@
 module registers(
-    input[1:0]addr,
+    input[2:0]addr,
     input rd,wr,
     input [7:0]data_in,
     output reg [7:0]data_out);
     
-reg [7:0] r[0:3];
+reg [7:0] r[0:7];
 always @(*)
 begin
     if(wr)

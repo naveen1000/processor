@@ -7,7 +7,7 @@ wire [7:0]alu_out;
 wire cy,zero;
 alu DUT(opcode,A,B,alu_out,cy,zero);
 //reg_tb
-reg [1:0]addr;
+reg [2:0]addr;
 reg rd;
 reg wr;
 reg [7:0]data_in;
