@@ -170,10 +170,15 @@ $monitor ($time," A=%d, B=%d,alu_out=%d,sel=%d,ir_data=%b",A,B,alu_out,addr,ir_d
                 #5 //$display("%d ",data_out);
                 if(data_out==8'b1000_0000)
                 begin#5 i=ir_data[7:0]-1;$display("JC executed");end
-                else
-                A=0;
                 end
-
+            4'b1001: // JZ LABEL
+                begin
+                #5 addr=3'b111; rd=1; 
+                #5 A=data_out;
+                #5 //$display("%d ",data_out);
+                if(data_out==8'b0100_0000)
+                begin#5 i=ir_data[7:0]-1;$display("JZ executed");end
+                end
         endcase
     end    
 #5 $finish;
