@@ -19,13 +19,19 @@ reg en;
 wire [15:0]ir_data;
 inst_reg IUT(pc,en,ir_data);
 
+//cu_tb
+
+ 
+//control_unit CUT(ir_data,addr,data_in,wr,rd,opcode);
 
 initial
 begin
-$monitor ($time," A=%d, B=%d,alu_out=%d,sel=%d,ir_data=%b",A,B,alu_out,addr,ir_data);
-    for (i=0; i<256; i=i+1)
-    begin
-        #5 pc=i;en=1;$display("%d",i);#5 
+    $monitor ($time," A=%d, B=%d,alu_out=%d,sel=%d,ir_data=%b",A,B,alu_out,addr,ir_data);
+        for (i=0; i<256; i=i+1)
+        begin
+            #5 pc=i;en=1;$display("%d",i);#5 
+
+
 
         case(ir_data[15:12])
             4'b1000: //load 
@@ -179,8 +185,19 @@ $monitor ($time," A=%d, B=%d,alu_out=%d,sel=%d,ir_data=%b",A,B,alu_out,addr,ir_d
                 if(data_out==8'b0100_0000)
                 begin#5 i=ir_data[7:0]-1;$display("JZ executed");end
                 end
+            
+            4'b0111: //MOV 
+                begin
+                addr=ir_data[5:4]; rd=1;
+                #5 
+                $display("MOV executed");
+                #5 addr=ir_data[9:8]; wr=1; data_in=data_out;
+                #5 wr=0; 
+                end
+
         endcase
-    end    
+
+        end    
 #5 $finish;
 end
 endmodule
