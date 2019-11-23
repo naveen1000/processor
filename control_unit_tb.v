@@ -10,7 +10,7 @@ initial
 begin
     $monitor ($time,"opcode=%d,rd=%d, wr=%d,data_in=%d,addr=%d,ir_data=%b",opcode,rd,wr,data_in,addr,ir_data);
         
-     #5 ir_data=16'b0000_0000_0000_0001;   
+     #5 ir_data=16'b1000_0000_0000_0001;   
 #5 $finish;
 end
 endmodule
