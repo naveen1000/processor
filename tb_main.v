@@ -19,8 +19,11 @@ reg en;
 wire [15:0]ir_data;
 inst_reg IUT(pc,en,ir_data);
 
-//cu_tb
-
+//mem_tb
+reg [7:0]maddr,mwr_data;
+reg mrd,mwr;
+wire [15:0]m_data;
+memory MemUT(maddr,mrd,mwr,mwr_data,m_data);
  
 //control_unit CUT(ir_data,addr,data_in,wr,rd,opcode);
 
@@ -106,6 +109,7 @@ begin
                     #5 addr=2'b10; rd=1; 
                     #5 addr=2'b11; rd=1; 
                     #5 addr=3'b111; rd=1; 
+                    
                 #5 $finish;
                 end
             4'b1110: //JNZ Reg LABEL

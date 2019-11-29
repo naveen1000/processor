@@ -4,6 +4,8 @@ module inst_reg(
     output [15:0]ir_data);
 
 
-memory MemUT(pc,en,ir_data);
+reg [7:0]mwr_data;
+reg mwr;
+memory RegUT(pc,en,mwr,mwr_data,ir_data);
 
 endmodule 
