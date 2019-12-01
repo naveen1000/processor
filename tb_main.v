@@ -36,13 +36,13 @@ begin
 
 
 
-        case(ir_data[15:12])
-            4'b1000: //load 
+        case(ir_data[15:11])
+            5'b01000: //load 
                 begin
                     addr=ir_data[9:8]; wr=1; data_in=ir_data[7:0];
                     #5 wr=0;
                 end
-            4'b0000: //add
+            5'b00000: //add
                 begin
                 addr=ir_data[5:4]; rd=1;
                 #5 A=data_out;
@@ -55,7 +55,7 @@ begin
                 #5 addr=3'b111; wr=1; data_in={cy,zero,6'b000000};
                 #5 wr=0; 
                 end
-            4'b0001: //sub
+            5'b00001: //sub
                 begin
                 addr=ir_data[5:4]; rd=1;
                 #5 A=data_out;
@@ -69,12 +69,12 @@ begin
                 #5 addr=3'b111; wr=1; data_in={cy,zero,6'b000000};
                 #5 wr=0; 
                 end
-            4'b1111: //JMP
+            5'b01111: //JMP
                 begin
                 $display("jmp executed");
                 i=ir_data[7:0]-1;
                 end
-            4'b1010: //INC
+            5'b01010: //INC
                 begin
                 addr=ir_data[9:8]; rd=1;
                 #5 A=data_out;
@@ -87,7 +87,7 @@ begin
                 #5 addr=3'b111; wr=1; data_in={cy,zero,6'b000000};
                 #5 wr=0; 
                 end
-            4'b1011: //DEC
+            5'b01011: //DEC
                 begin
                 addr=ir_data[9:8]; rd=1;
                 #5 A=data_out;
@@ -100,7 +100,7 @@ begin
                 #5 addr=3'b111; wr=1; data_in={cy,zero,6'b000000};
                 #5 wr=0; 
                 end
-            4'b1100: //HLT
+            5'b01100: //HLT
                 begin
                 $display("HLT executed");
                 //To display reg contents by reading
@@ -112,7 +112,7 @@ begin
                     
                 #5 $finish;
                 end
-            4'b1110: //JNZ Reg LABEL
+            5'b01110: //JNZ Reg LABEL
                 begin
                 $display("djmp executed");
                 #5 addr=ir_data[9:8]; rd=1;
@@ -123,7 +123,7 @@ begin
                 else
                 #5 i=ir_data[7:0]-1;
                 end
-            4'b0010: //and
+            5'b00010: //and
                 begin
                 addr=ir_data[5:4]; rd=1;
                 #5 A=data_out;
@@ -136,7 +136,7 @@ begin
                 #5 addr=3'b111; wr=1; data_in={cy,zero,6'b000000};
                 #5 wr=0; 
                 end
-            4'b0011: //or
+            5'b00011: //or
                 begin
                 addr=ir_data[5:4]; rd=1;
                 #5 A=data_out;
@@ -149,7 +149,7 @@ begin
                 #5 addr=3'b111; wr=1; data_in={cy,zero,6'b000000};
                 #5 wr=0; 
                 end
-            4'b0100: //xor
+            5'b00100: //xor
                 begin
                 addr=ir_data[5:4]; rd=1;
                 #5 A=data_out;
@@ -162,7 +162,7 @@ begin
                 #5 addr=3'b111; wr=1; data_in={cy,zero,6'b000000};
                 #5 wr=0; 
                 end
-            4'b0101: //INV
+            5'b00101: //INV
                 begin
                 addr=ir_data[5:4]; rd=1;
                 #5 A=data_out;
@@ -173,7 +173,7 @@ begin
                 #5 addr=3'b111; wr=1; data_in={cy,zero,6'b000000};
                 #5 wr=0; 
                 end
-            4'b1101: // JC LABEL
+            5'b01101: // JC LABEL
                 begin
                 #5 addr=3'b111; rd=1; 
                 #5 A=data_out;
@@ -181,7 +181,7 @@ begin
                 if(data_out==8'b1000_0000)
                 begin#5 i=ir_data[7:0]-1;$display("JC executed");end
                 end
-            4'b1001: // JZ LABEL
+            5'b01001: // JZ LABEL
                 begin
                 #5 addr=3'b111; rd=1; 
                 #5 A=data_out;
@@ -190,7 +190,7 @@ begin
                 begin#5 i=ir_data[7:0]-1;$display("JZ executed");end
                 end
             
-            4'b0111: //MOV 
+            5'b00111: //MOV 
                 begin
                 addr=ir_data[5:4]; rd=1;
                 #5 
@@ -198,7 +198,7 @@ begin
                 #5 addr=ir_data[9:8]; wr=1; data_in=data_out;
                 #5 wr=0; 
                 end
-            4'b0110: //SHL
+            5'b00110: //SHL
                 begin
                 addr=ir_data[9:8]; rd=1;
                 #5 A=data_out;
@@ -210,6 +210,20 @@ begin
                 #5 wr=0; 
                 #5 addr=3'b111; wr=1; data_in={cy,zero,6'b000000};
                 #5 wr=0; 
+                end
+            5'b10000: //LDM
+                begin
+                maddr=ir_data[7:0]; mrd=1;
+                #5 addr=ir_data[9:8]; wr=1; data_in=m_data;
+                #5 wr=0; 
+                end
+            5'b10001: //STM
+                begin
+                addr=ir_data[9:8]; rd=1;
+                #5 A=data_out;
+                $display("stm executed");
+                #5 maddr=ir_data[7:0]; mwr=1; mwr_data=data_out;  
+                #5 mwr=0;
                 end
 
         endcase
