@@ -62,6 +62,13 @@ for line in lines:
     l= len(keys)
     for i in range(0,l):
         key =keys[i]
+        if (i==0 and key.isnumeric()):#check for data to be of 16-bit
+            for i in range(0,l):
+                key =keys[i]
+                p="{:04b}".format(int(key))
+                s=s+str(p)+"_"
+            break 
+
         if i!=1:
             p=codes.get(key)
             if(codes.get(key)==None):
@@ -70,7 +77,6 @@ for line in lines:
             s=s+str(p)+"_"
         else:
             p=dreg_codes.get(key)
-            print("2")
             if(dreg_codes.get(key)==None):
                 if(key.isnumeric()):
                     p="{:03b}".format(int(key))
@@ -88,8 +94,7 @@ for line in lines:
             pass
         else:
             s=s+"0000"+"_"
-
-
+        
     print(s)
     f.write(s+"\n")
 
