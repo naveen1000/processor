@@ -17,6 +17,7 @@ codes={
     "JMP": "01111",
     "LDM": "10000",
     "STM": "10001",
+    "SHR": "10010",
     "R0" : "0000", 
     "R1" : "0001", 
     "R2" : "0010", 
@@ -33,28 +34,7 @@ dreg_codes={
 f = open("machine_code.mem", "w")
 lines = [line.rstrip('\n') for line in open('assembly_code.txt')]
 print(lines)
-'''
-for line in lines:
-    keys=line.split(" ")
-    print(keys)
-    s=""
-    for count,key in enumerate(keys):
-        if count!=1:
-            p=codes.get(key)
-            if(codes.get(key)==None):
-                if(key.isnumeric()):
-                    p="{:04b}".format(int(key))
-            s=s+str(p)+"_"
-        else:
-            p=dreg_codes.get(key)
-            print("2")
-            if(dreg_codes.get(key)==None):
-                if(key.isnumeric()):
-                    p="{:03b}".format(int(key))
-            s=s+str(p)+"_"
-    print(s)
-    f.write(s+"\n")
-'''
+
 for line in lines:
     keys=line.split(" ")
     print(keys)

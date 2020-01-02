@@ -226,6 +226,20 @@ begin
                 #5 mwr=0;
                 end
 
+            5'b10010: //SHR
+                begin
+                addr=ir_data[9:8]; rd=1;
+                #5 A=data_out;
+                addr=ir_data[5:4]; rd=1;
+                #5 B=data_out;
+                #5 opcode = 3'b110;
+                $display("SHR executed");
+                #5 addr=ir_data[9:8]; wr=1; data_in=alu_out;
+                #5 wr=0; 
+                #5 addr=3'b111; wr=1; data_in={cy,zero,6'b000000};
+                #5 wr=0; 
+                end
+
         endcase
 
         end    
