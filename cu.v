@@ -62,7 +62,7 @@ begin
                 addr=ir_data[1:0]; rd=1;
                 #5 B=data_out;
                 #5 //$display("opcode=%b",ir_data[14:12]);
-                #5 opcode = ir_data[14:12];
+                #5 opcode = 3'b001;
                 $display("sub executed");
                 #5 addr=ir_data[9:8]; wr=1; data_in=alu_out;
                 #5 wr=0; 
